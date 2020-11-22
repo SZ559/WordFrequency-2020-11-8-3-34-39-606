@@ -9,7 +9,8 @@ namespace WordFrequency
     {
         public string GetResult(string inputStr)
         {
-            string[] splitStringArray = Regex.Split(inputStr, @"\s+");
+            var spacesRegex = @"\s+";
+            string[] splitStringArray = Regex.Split(inputStr, spacesRegex);
 
             Dictionary<string, Input> inputMap = GetInputMap(splitStringArray);
             var inputList = inputMap.Values.ToList();
