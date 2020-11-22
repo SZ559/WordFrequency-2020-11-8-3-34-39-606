@@ -8,7 +8,6 @@ namespace WordFrequency
     {
         public string GetResult(string inputStr)
         {
-            //split the input string with 1 to n pieces of spaces
             string[] splitStringArray = Regex.Split(inputStr, @"\s+");
 
             List<Input> inputList = new List<Input>();
