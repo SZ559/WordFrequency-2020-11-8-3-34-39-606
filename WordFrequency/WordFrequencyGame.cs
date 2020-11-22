@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace WordFrequency
@@ -10,24 +11,8 @@ namespace WordFrequency
         {
             string[] splitStringArray = Regex.Split(inputStr, @"\s+");
 
-            List<Input> inputList = new List<Input>();
-            foreach (var s in splitStringArray)
-            {
-                Input input = new Input(s, 1);
-                inputList.Add(input);
-            }
-
-            //get the map for the next step of sizing the same word
-            Dictionary<string, List<Input>> map = GetListMap(inputList);
-
-            List<Input> list = new List<Input>();
-            foreach (var entry in map)
-            {
-                Input input = new Input(entry.Key, entry.Value.Count);
-                list.Add(input);
-            }
-
-            inputList = list;
+            Dictionary<string, Input> inputMap = GetInputMap(splitStringArray);
+            var inputList = inputMap.Values.ToList();
 
             inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
 
@@ -42,24 +27,36 @@ namespace WordFrequency
             return string.Join("\n", strList.ToArray());
         }
 
-        private Dictionary<string, List<Input>> GetListMap(List<Input> inputList)
+        private Dictionary<string, Input> GetInputMap(string[] splitStringArray)
         {
-            Dictionary<string, List<Input>> map = new Dictionary<string, List<Input>>();
-            foreach (var input in inputList)
+            Dictionary<string, Input> map = new Dictionary<string, Input>();
+            foreach (var splitString in splitStringArray)
             {
-                if (!map.ContainsKey(input.Value))
+                if (map.ContainsKey(splitString))
                 {
-                    List<Input> arr = new List<Input>();
-                    arr.Add(input);
-                    map.Add(input.Value, arr);
+                    var updatedWordCount = map[splitString].WordCount + 1;
+                    map[splitString] = new Input(splitString, updatedWordCount);
                 }
                 else
                 {
-                    map[input.Value].Add(input);
+                    var input = new Input(splitString, 1);
+                    map.Add(input.Value, input);
                 }
             }
 
             return map;
+        }
+
+        private List<Input> MapSplitStringArrayToInputList(string[] splitStringArray)
+        {
+            List<Input> inputList = new List<Input>();
+            foreach (var s in splitStringArray)
+            {
+                Input input = new Input(s, 1);
+                inputList.Add(input);
+            }
+
+            return inputList;
         }
     }
 }
