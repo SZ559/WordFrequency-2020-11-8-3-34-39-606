@@ -2,24 +2,15 @@
 {
     public class Input
     {
-        private string value;
-        private int count;
-
         public Input(string value, int count)
         {
-            this.value = value;
-            this.count = count;
+            Value = value;
+            WordCount = count;
         }
 
-        public string Value
-        {
-            get { return this.value; }
-        }
+        public string Value { get; }
 
-        public int WordCount
-        {
-            get { return this.count; }
-        }
+        public int WordCount { get; }
 
         public override string ToString()
         {
