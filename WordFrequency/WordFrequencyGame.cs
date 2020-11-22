@@ -46,17 +46,5 @@ namespace WordFrequency
 
             return map;
         }
-
-        private List<Input> MapSplitStringArrayToInputList(string[] splitStringArray)
-        {
-            List<Input> inputList = new List<Input>();
-            foreach (var s in splitStringArray)
-            {
-                Input input = new Input(s, 1);
-                inputList.Add(input);
-            }
-
-            return inputList;
-        }
     }
 }
