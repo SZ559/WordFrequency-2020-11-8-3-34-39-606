@@ -9,10 +9,10 @@ namespace WordFrequency
         public string GetResult(string inputStr)
         {
             //split the input string with 1 to n pieces of spaces
-            string[] arr = Regex.Split(inputStr, @"\s+");
+            string[] splitStringArray = Regex.Split(inputStr, @"\s+");
 
             List<Input> inputList = new List<Input>();
-            foreach (var s in arr)
+            foreach (var s in splitStringArray)
             {
                 Input input = new Input(s, 1);
                 inputList.Add(input);
