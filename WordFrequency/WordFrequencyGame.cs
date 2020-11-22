@@ -14,7 +14,7 @@ namespace WordFrequency
             Dictionary<string, Input> inputMap = GetInputMap(splitStringArray);
             var inputList = inputMap.Values.ToList();
 
-            inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
+            inputList.Sort((input1, input2) => input2.WordCount - input1.WordCount);
 
             List<string> strList = new List<string>();
 
