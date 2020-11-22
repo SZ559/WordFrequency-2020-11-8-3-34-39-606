@@ -20,5 +20,10 @@
         {
             get { return this.count; }
         }
+
+        public override string ToString()
+        {
+            return Value + " " + WordCount;
+        }
     }
 }
